@@ -21,7 +21,7 @@ module.exports = function(app){
     })
 
     // Upload files to S3 Bucket
-    app.post('/upload/live', function (req, res) {
+    app.post('/upload/live/:folder', function (req, res) {
         const UploadFiles = S3_UPLOAD.any();
         try {
             UploadFiles(req, res, async function (err, some) {

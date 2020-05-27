@@ -8,7 +8,6 @@ var storage = multer.diskStorage({
        cb(null, './uploads');    
     }, 
     filename: function (req, file, cb) { 
-        console.log(req,456)
         cb(null, uuid.v4() + path.extname(file.originalname));
     }
  });

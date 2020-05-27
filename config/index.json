@@ -10,6 +10,11 @@
         "JWT":{
             "SECERT":"solve@this$if*possible",
             "EXPIRE":"100h"
+        },
+        "S3":{
+            "ACCESS_KEY_ID": "AKIA5CHJSW7U6K4SDATG",
+            "SECRET_ACCESS_KEY": "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",
+            "BUCKET": "news-bucket-5986"
         }
     },
     "production":{
