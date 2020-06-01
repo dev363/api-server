@@ -1,7 +1,7 @@
 {
     "mode":"development",
     "development":{
-        "port":3000,
+        "port":4000,
         "db":{
             "MONGO_USER": "satn363",
             "MONGO_PASSWORD": "WcMlUpWP4yWOMomV",
@@ -21,5 +21,5 @@
         "port":4000
     },
     "VALID_FILES_EXT":"/jpeg|jpg|png|gif|mp4|avi|mov|flv|wmv|3gp/",
-    "USER_NO_IMAGE":"https://news-bucket-5986.s3.us-east-2.amazonaws.com/users/no-image.jpg"
+    "USER_NO_IMAGE":"https://news-bucket-5986.s3.us-east-2.amazonaws.com/users/no-user.jpg"
 }

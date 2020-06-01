@@ -1,8 +1,10 @@
-const express= require('express')
+const express= require('express');
 const app= express();
 const bodyParser= require('body-parser');
 const graphqlHttp= require('express-graphql');
 const mongoose= require('mongoose');
+const path= require('path');
+const Http= require('http');
 
 //****Config data****/
 const config= require('./config');
@@ -14,6 +16,7 @@ const isAuth = require('./middlewares/IsAuth');
 const Schema= require('./graphql/schema')
 const Resolvers= require('./graphql/resolvers')
 
+const server = Http.createServer(app);
 app.use(bodyParser.json());
 
 app.use((req, res, next) => {
@@ -28,10 +31,11 @@ app.use((req, res, next) => {
   
   app.use(isAuth);
 
-app.get('/',(req,res)=>{
-    res.json({message:'Api working fine'})
-})
+// app.get('/',(req,res)=>{
+//     res.json({message:'Api working fine'})
+// })
 
+app.use(express.static(path.join(__dirname, 'chat-app')));
 
 app.use('/graphql',graphqlHttp({
     schema:Schema,
@@ -39,7 +43,6 @@ app.use('/graphql',graphqlHttp({
     graphiql:true
 }))
 
-require('./routes')(app);
 
 mongoose.connect(`mongodb+srv://${MONGO_USER}:${MONGO_PASSWORD}@cluster0-pxyis.mongodb.net/${MONGO_DB}?retryWrites=true`,{ useNewUrlParser: true },)
 .then(res=>{
@@ -47,7 +50,10 @@ mongoose.connect(`mongodb+srv://${MONGO_USER}:${MONGO_PASSWORD}@cluster0-pxyis.m
         let host = server.address().address;
         let port = server.address().port;
         console.log('Example app listening at http://%s:%s', host, port);
-      })
+    })
+    require('./routes')(app); // Add routes to App
+    require('./socket')(server); // connect Socket to App
+
 })
 .catch(err=>{
     console.log(err)
